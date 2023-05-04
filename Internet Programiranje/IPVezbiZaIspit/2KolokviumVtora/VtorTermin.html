@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VtorTermin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        .box {
+            border: black solid 3px;
+            height: 120px;
+            width: 120px;
+            font-size: 120px;
+            text-align: center;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const data = '["bukva", "jazik", "vokal", "misla", "tablo"]';
+        let newData = JSON.parse(data);
+
+        let randomIndex = Math.floor(Math.random() * newData.length);
+        let randomWord = newData[randomIndex];
+        console.log(randomWord);
+
+        createBox();
+        function createBox() {
+            let div = document.createElement("div");
+            for (let i = 0; i < 5; i++) {
+                let input = document.createElement("input");
+                input.setAttribute("class", "box");
+                input.setAttribute("id", "id" + i);
+                div.appendChild(input);
+
+                input.addEventListener("keydown", function(e) {
+                    if (e.key === "Enter") {
+                        checkBox();
+                    }
+                })
+            }
+            document.body.appendChild(div);
+        }
+
+        function checkBox() {
+            let boolean = true;
+            for (let i = 0; i < 5; i++) {
+                let inputs = document.getElementsByTagName("input");
+                if (inputs[i].value.length !== 1) {
+                    boolean = false;
+                    window.alert("Ve molime vnesete edna bukva vo kocka i popolnete gi site kocki");
+                    break;
+                }
+            }
+
+            if (boolean === true) {
+                checkTheInputs();
+            }
+        }
+
+        function checkTheInputs() {
+            let inputs = [];
+            for (let i = 0; i < 5; i++) {
+                inputs[i] = document.getElementById("id" + i);
+            }
+            let insertedWord = "";
+
+            for (let i = 0; i < inputs.length; i++) {
+                insertedWord += inputs[i].value;
+            }
+
+            if (insertedWord === randomWord) {
+                document.body.style.backgroundColor = "green";
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].style.backgroundColor = "green";
+                }
+            }
+
+            if (insertedWord !== randomWord) {
+                for (let i = 0; i < inputs.length; i++) {
+                    for (let j = 0; j < inputs.length; j++) {
+                        if (i === j && inputs[i].value === randomWord[j]) {
+                            inputs[i].style.backgroundColor = "green";
+                        }
+                        if (i !== j && inputs[i].value === randomWord[j]) {
+                            inputs[i].style.backgroundColor = "yellow";
+                        }
+                    }
+                }
+
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].removeAttribute("id");
+                }
+                createBox();
+            }
+        }
+    </script>
+</body>
+</html>

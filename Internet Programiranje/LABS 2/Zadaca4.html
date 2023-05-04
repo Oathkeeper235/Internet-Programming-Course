@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca4</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><input type="text" id="inputA1"></td>
+            <td><input type="text" id="inputB1"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="inputA2"></td>
+            <td><input type="text" id="inputB2"></td>
+        </tr>
+        <tr>
+            <td><button onclick="presmetaj()">Add</button></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="rezultat1"></td>
+            <td><input type="text" id="rezultat2"></td>
+        </tr>
+    </table>
+</body>
+<script>
+
+    function presmetaj() {
+        let rezultatA = Number(document.getElementById("inputA1").value) + Number(document.getElementById("inputA2").value);
+        let rezultatB = Number(document.getElementById("inputB1").value) + Number(document.getElementById("inputB2").value);
+
+        document.getElementById("rezultat1").value = rezultatA;
+        document.getElementById("rezultat2").value = rezultatB;
+    }
+
+</script>
+</html>

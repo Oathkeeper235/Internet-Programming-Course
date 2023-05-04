@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca1</title>
+</head>
+<body>
+    <form>
+        <select id = "colorSelect">
+            <option>Red</option>
+            <option>Green</option>
+            <option>White</option>
+            <option>Black</option>
+        </select>
+        <input type="button" onclick="removeColor()" value="Select and Remove"><br>
+    </form>
+</body>
+<script>
+
+    function removeColor() {
+        let color = document.getElementById("colorSelect");
+        console.log(color.value);
+
+        color.remove(color.selectedIndex);
+        if (color.length === 0)
+            console.log("The list is empty.");
+    }
+
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PrvTermin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<style>
+    textarea{
+        width: 400px;
+        height: 300px;
+    }
+</style>
+<body>
+    <textarea id="text">
+
+    </textarea>
+    <button id="button" onclick="remove()">Прикажи</button>
+
+    <script>
+        function remove() {
+            let text = document.getElementById("text");
+            document.getElementById("text").hidden = true;
+            document.getElementById("button").hidden = true;
+
+            split(text);
+        }
+
+        function split(text) {
+            let textArray = text.value.split(/\s+/);
+            console.log(textArray);
+
+            createElements(textArray);
+        }
+
+        function createElements(textArray) {
+            let count = 20;
+            for (let i = 0; i < textArray.length; i++) {
+                let randomLeft = Math.floor(Math.random() * (1300 + 10) - 10);
+                let randomRight = Math.floor(Math.random() * (700 + 10) - 10);
+                let randomColor = Math.floor(Math.random() * 16777216).toString(16);
+
+                let paragraph = document.createElement("p");
+                paragraph.innerHTML = textArray[i];
+                paragraph.style.position = "fixed";
+                paragraph.style.left = randomLeft + "px";
+                paragraph.style.right = randomRight + "px";
+                paragraph.style.color = "#" + randomColor;
+                paragraph.style.fontSize = count + "px";
+                count += 20;
+
+                document.body.appendChild(paragraph).hidden = true;
+            }
+
+            let paragraphs = document.getElementsByTagName("p");
+            let i = 0;
+            function show() {
+                paragraphs[i].hidden = false;
+                i++;
+                if (i < paragraphs.length) {
+                    setTimeout(show, 500);
+                }
+            }
+
+            show();
+        }
+
+
+    </script>
+</body>
+</html>

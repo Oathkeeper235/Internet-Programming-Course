@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca2</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let n = prompt("Колку елементи ќе содржи листата?");
+
+    if (n < 1 || isNaN(n)) {
+        window.alert("Внесете валидна големина на листа.");
+        location.reload();
+    } else {
+        let array = [];
+        for (let i = 0; i < n; i++) {
+            array.push(prompt("Внесете го елементот број " + i + ":"));
+        }
+
+        let el = prompt("Внесете го елементот кој треба да се избрише: ");
+
+        while (!array.includes(el)) {
+            window.alert("Листата не содржи ваков елемент, обидете се повторно.");
+            el = prompt("Внесете го елементот кој треба да се избрише: ");
+        }
+
+        /* Za da gi izbrishe site takvi elementi:
+            function removeArrayElement(list, element) {
+                let index = list.indexOf(element);
+                while (index > -1) {
+                    list.splice(index, 1);
+                    index = list.indexOf(element);
+                }
+
+                return list;
+            }
+        */
+
+        // Ako ima povekje takvi elementi, go brishe samo prviot:
+        function removeArrayElement(list, element) {
+            const index = list.indexOf(element);
+            if (index > -1) {
+                list.splice(index, 1);
+            }
+
+            return list;
+        }
+
+        window.alert(removeArrayElement(array, el));
+        console.log(removeArrayElement(array, el));
+    }
+
+</script>
+</html>

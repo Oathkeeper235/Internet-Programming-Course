@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca2</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let telefonskiBroj = prompt("Внесете телефонски број во формат XXYYYZZZ (пр. 71298486):");
+
+    if (telefonskiBroj.length !== 8 || telefonskiBroj.substring(0, 1) !== '7') {
+        window.alert("Внесовте непостоечки телефонски број, обидете се повторно.");
+        location.reload();
+    } else {
+        function proveriOperator(broj) {
+            switch (broj.substring(1, 2)) {
+                case '0':
+                case '1':
+                case '2':
+                    return "T-mobile";
+                case '5':
+                case '6':
+                    return "One";
+                case '7':
+                case '8':
+                    return "Vip";
+                default:
+                    return "Внесовте непостоечки телефонски број, обидете се повторно";
+            }
+        }
+
+        console.log(proveriOperator(telefonskiBroj));
+
+        let rezultat = '0' + telefonskiBroj.substring(0, 2) + "/" + telefonskiBroj.substring(2, 5) + "-"
+            + telefonskiBroj.substring(5, 8);
+
+        window.alert(rezultat + " - " + proveriOperator(telefonskiBroj));
+        location.reload();
+    }
+
+</script>
+</html>

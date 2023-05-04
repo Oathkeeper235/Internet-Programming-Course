@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca3</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let string = prompt("Внесете стринг:");
+
+    function najdolgZborVoString(input) {
+        const array = input.split(' ');
+        let dolzina = 0;
+        let rezultat = 0;
+
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].length > dolzina) {
+                dolzina = array[i].length;
+                rezultat = i;
+            }
+        }
+        return array[rezultat];
+    }
+
+    console.log(najdolgZborVoString(string));
+
+    let vlez = "Влез: " + string;
+    let izlez = "Најдолг збор: " + najdolgZborVoString(string);
+
+    window.alert(vlez + '\n' + izlez);
+    location.reload();
+
+</script>
+</html>

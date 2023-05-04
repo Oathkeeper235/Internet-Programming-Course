@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vezba</title>
+</head>
+<style>
+    input {
+        margin: 5px;
+    }
+</style>
+<body>
+    Име:     <input type="text" id="ime"> <br>
+    Презиме: <input type="text" id="prezime"> <br>
+    Индекс:  <input type="text" id="index"> <br>
+    <button id="button" onclick="submit()">Submit Student</button>
+</body>
+<script>
+    let i = 0;
+    let ime = document.getElementById("ime");
+    let prezime = document.getElementById("prezime");
+    let index = document.getElementById("index");
+    let button = document.getElementById("button");
+
+    function submit() {
+        i++;
+        let div = document.createElement("div");
+        div.setAttribute("id", "id" + i);
+        div.innerHTML = ime.value + "<br>" + prezime.value + "<br>" + index.value + "<br>" + "<button>Padnal</button>" + "<button>Polozhil</button>";
+        div.style.width = "200px";
+        div.style.height = "300px";
+        div.style.fontSize= "35px";
+        div.style.backgroundColor = "gray";
+        div.style.position = "absolute";
+
+        div["left"] = 0;
+
+        document.body.appendChild(div);
+
+        let buttons = div.getElementsByTagName("button");
+        buttons[0].addEventListener("click", remove);
+        buttons[1].addEventListener("click", polozhi);
+    }
+
+    function remove() {
+        let div = document.getElementById("id" + i);
+        let buttons = div.getElementsByTagName("button");
+
+        let inter = setInterval(function () {
+            div["left"] += 5;
+            div.style.left = div["left"] + "px";
+            if (div["left"] > 1920) {
+                clearInterval(inter);
+                div.style.backgroundColor = "red";
+                div["left"] = -200;
+                div.style.left = div["left"];
+                let inter2 = setInterval(function () {
+                    div["left"] += 5;
+                    div.style.left = div["left"] + "px";
+                    if (div["left"] === 500) {
+                        clearInterval(inter2);
+                        buttons[0].remove();
+                        buttons[1].remove();
+                        div.style.position = "fixed";
+                    }
+                }, 10)
+            }
+        }, 10);
+
+    }
+
+    function polozhi() {
+        let div = document.getElementById("id" + i);
+        let buttons = div.getElementsByTagName("button");
+
+        let inter = setInterval(function () {
+            div["left"] += 5;
+            div.style.left = div["left"] + "px";
+            if (div["left"] > 1920) {
+                clearInterval(inter);
+                div.style.backgroundColor = "green";
+                div["left"] = -200;
+                div.style.left = div["left"];
+                let inter2 = setInterval(function () {
+                    div["left"] += 5;
+                    div.style.left = div["left"] + "px";
+                    if (div["left"] === 500) {
+                        clearInterval(inter2);
+                        buttons[0].remove();
+                        buttons[1].remove();
+                        div.style.position = "fixed";
+                    }
+                }, 10)
+            }
+        }, 10);
+    }
+
+</script>
+</html>

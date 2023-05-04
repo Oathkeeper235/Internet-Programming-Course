@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca1</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let broj = prompt("Внесете трицифрен број: ");
+
+    if (broj.length !== 3) {
+        window.alert("Внесениот број не е трицифрен, внесете трицифрен број.");
+        location.reload();
+    } else if ((/[a-zA-Z]/).test(broj)) {
+        window.alert("Вашиот влез не е број, внесете трицифрен број.");
+        location.reload();
+    } else {
+        function reverseNumber(num) {
+            let reversed = 0;
+            while (num !== 0) {
+                reversed = (reversed * 10) + (num % 10);
+                num = num / 10 | 0;
+            }
+            return reversed;
+        }
+
+        console.log(reverseNumber(broj));
+
+        if (broj === reverseNumber(broj).toString())
+            window.alert("Бројот е палиндром");
+        else
+            window.alert("Бројот не е палиндром");
+
+        location.reload();
+    }
+
+</script>
+</html>

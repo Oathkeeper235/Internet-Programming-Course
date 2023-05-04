@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Zadaca2</title>
+</head>
+<body>
+<div>
+    <div style="text-align:right; float:left">
+        <label id="obid">Обиди 0</label>
+        <p>Погодок: <input id="guess" style="width:150px"/></p>
+        <button>Погоди</button>
+        <button>Од почеток</button>
+    </div>
+</div>
+<br/>
+<div id="prikaz" style="clear: both">
+
+</div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let $actions = document.getElementsByTagName("button");
+        let tryCount = 0;
+        let randomNumber = randomFromRange(1000, 9999);
+        let $display = document.getElementById("prikaz");
+        let $tryCount = document.getElementById("obid");
+        let $guessInput = document.getElementById("guess");
+
+        function randomFromRange(min, max) {
+            return Math.ceil(Math.random() * (max - min) + min);
+        }
+
+        function verify(number) {
+            let onSameSpot = 0, contains = 0, num1 = randomNumber + '', num2 = number + '';
+
+            for (let i = 0; i < 4; i++) {
+                if (num2.indexOf(num1[i]) > -1) {
+                    contains++;
+                    if (num2[i] === num1[i])
+                        onSameSpot++;
+                }
+            }
+
+            return [contains, onSameSpot];
+        }
+
+        function guess() {
+            tryCount++;
+            let bingo = false;
+
+            if (tryCount <= 10) {
+                $tryCount.innerHTML = tryCount;
+                let hint = verify($guessInput.value);
+                $display.innerHTML += "Има " + hint[0] + ", на место " + hint[1] + " " + $guessInput.value + "<br/>";
+
+                if ($guessInput.value === randomNumber) {
+                    $display.innerHTML += "ПОГОДОК!!!";
+                    bingo = true;
+                    tryCount = 10;
+                }
+            }
+
+            if (tryCount === 10 && !bingo) {
+                $display.innerHTML += "Не успеавте да го погодите бројот од 10 обиди. Бројот е " + randomNumber;
+            }
+        }
+
+        function retry() {
+            randomNumber = randomFromRange(1000, 9999);
+            $tryCount.innerHTML = tryCount = 0;
+            $display.innerHTML = "";
+        }
+
+        $actions[0].addEventListener("click", guess);
+        $actions[1].addEventListener("click", retry);
+    });
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <script>
+    </script>
+    <title>Zadaca1</title>
+</head>
+<body>
+<h1>Калкулатор</h1>
+<div>
+    <div style="text-align:left; float:left">
+        <p> а <input id="a" style="width:15px"/>
+            b <input id="b" style="width:15px"/></p>
+        <p>
+            <input id="plus" type="radio" name="oper" checked>a+b
+            <input id="minus" type="radio" name="oper">a-b
+            <input id="mnoz" type="radio" name="oper">a*b
+            <input id="del" type="radio" name="oper">a/b
+            <br>
+            <input id="sin" type="radio" name="oper">sin(a)
+            <input id="cos" type="radio" name="oper">cos(a)
+            <input id="tg" type="radio" name="oper">tg(a)
+            <br>
+            <input id="cel" type="radio" name="oper">[a]
+            <input id="stepen" type="radio" name="oper">a<sup>b</sup>
+            <input id="koren" type="radio" name="oper">&radic;<span style="text-decoration:overline">a</span>
+        </p>
+        <button onclick="presmetaj()">Пресметај</button>
+        <p id="rezultat"></p>
+    </div>
+</div>
+<br/>
+</body>
+<script>
+
+    function presmetaj() {
+        let a = parseInt(document.getElementById("a").value);
+        let b = parseInt(document.getElementById("b").value);
+
+        if (document.getElementById("plus").checked) {
+            document.getElementById("rezultat").innerText = a + b;
+        }
+
+        if (document.getElementById("minus").checked) {
+            document.getElementById("rezultat").innerText = a - b;
+        }
+
+        if (document.getElementById("mnoz").checked) {
+            document.getElementById("rezultat").innerText = a * b;
+        }
+
+        if (document.getElementById("del").checked) {
+            document.getElementById("rezultat").innerText = a / b;
+        }
+
+        if (document.getElementById("sin").checked) {
+            document.getElementById("rezultat").innerText = Math.sin(a);
+        }
+
+        if (document.getElementById("cos").checked) {
+            document.getElementById("rezultat").innerText = Math.cos(a);
+        }
+
+        if (document.getElementById("tg").checked) {
+            document.getElementById("rezultat").innerText = Math.tan(a);
+        }
+
+        if (document.getElementById("cel").checked) {
+            document.getElementById("rezultat").innerText = Math.abs(a);
+        }
+
+        if (document.getElementById("stepen").checked) {
+            document.getElementById("rezultat").innerText = Math.pow(a, b);
+        }
+
+        if (document.getElementById("koren").checked) {
+            document.getElementById("rezultat").innerText = Math.sqrt(a);
+        }
+    }
+
+</script>
+</html>

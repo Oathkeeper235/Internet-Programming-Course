@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+/*
+    Да се направи веб-страница за генерирање сметки при осигурување на возила. Во горниот дел од веб-страницата се внесуваат
+    податоци за возилото и тоа: име и презиме на сопственикот, регистарска табличка на возилото, години на старост на возилото
+    и информации за претходни сообраќајни незгоди (Да или Не). При кликнување на копчето “Генерирај сметка”, ако сите полиња се пополнети,
+    се додава сметката која сопственикот треба да ја плати, а полињата се рестартираат (15 поени). Ако не се внесени сите полиња се печати порака за
+    грешка (5 поени). Притоа, при генерирањето на сметката треба да се направи проверка на регистарската табличка на возилото. Треба да се провери дали форматот
+    на внесената таблица одговара на форматот во нашата држава, односно AB-1234-QW (две букви-четири броеви-две букви) (15 поени). Исто така, потребно е да се пресмета
+    цената која сопственикот треба да ја плати. Основата на цената е 3000 денари, а дополнително се додава 1000 денари доколку возилото има златна таблица (сите четири броеви се исти).
+    Исто така, доколку возилото учествувало во сообраќајна незгода претходно се додаваат уште 500 денари (15 поени). Соодветно, сметката е обоена во црвено доколку станува збор за возило постаро од 30 години,
+    а во спротивно е зелена (5 поени). Во сметката има и копчиња „Плати“ и „Избриши“. За секоја сметка при кликнување на копчето „Плати“ двете копчиња се оневозможуваат,
+    а при клик на копчето „Избриши“ избраната сметка се брише од погледот (5 поени). Вкупниот број на сметки е запишан до формата (5 поени). Во прилог изгледот на страницата(15 поени).
+*/
+<head>
+    <meta charset="UTF-8">
+    <title>OsiguruvanjeNaVozila</title>
+</head>
+<body>
+
+    <h1>Осигурување на возила</h1>
+    <div><label>Име </label> <input type="text" id="ime"></div>
+    <div><label>Презиме </label> <input type="text" id="prezime"></div>
+    <div><label>Регистарска таблица </label> <input type="text" id="tablica"></div>
+    <div><label>Години на старост </label> <input type="text" id="starost"></div>
+
+    <div>
+        <label>Сообраќајна незгода</label>
+        <input type="radio" id="da" value="Има" name="radio">Да
+        <input type="radio" id="ne" value="Нема" name="radio">Не
+    </div>
+
+    <div><input type="button" id="submit" value="Генерирај сметка" onclick="addColumn()"></div>
+
+    <h2>Сметки</h2>
+    <div><label>Вкупно сметки за плаќање: </label> <span id="vkupnoSmetki"></span></div>
+
+    <table id="smetki">
+        <tbody>
+
+        </tbody>
+    </table>
+
+</body>
+<style>
+    label {
+        display: inline-block;
+        width: 200px;
+    }
+    div {
+        padding: 5px;
+    }
+</style>
+<script>
+
+    function addColumn() {
+        let ime = document.getElementById("ime").value;
+        let prezime = document.getElementById("prezime").value;
+        let tablica = document.getElementById("tablica");
+
+        let starost = document.getElementById("starost").value;
+
+        let nezgodi = document.getElementsByName("radio");
+        let nezgoda = "";
+
+        let cenaZaPlakjanje = Number("3000");
+
+        for (let i = 0; i < nezgodi.length; i++) {
+            if (nezgodi[i].checked)
+                nezgoda = nezgodi[i].value;
+        }
+
+        if (ime === "" || prezime === "" || tablica.value === "" || starost === "" || nezgoda === "") {
+            alert("Треба да ги пополните сите полиња.");
+            return;
+        }
+
+        if (tablica.value.length < 9 || tablica.value.length > 10 || isNaN(tablica.value.substring(0,2)) === false
+            || isNaN(tablica.value.substring(0,1)) === false || isNaN(tablica.value.substring(1,2)) === false
+            || isNaN(tablica.value.substring(3,6)) === true || isNaN(tablica.value.substring(8,9)) === false) {
+            alert("Таблицата која ја внесовте не постои, внесете ја во формат: AB-1234-QW");
+            return;
+        }
+
+        if (tablica.value[3] === tablica.value[4] === tablica.value[5] === tablica.value[6]) {
+            cenaZaPlakjanje = Number(cenaZaPlakjanje) + Number("4000");
+        }
+        if (nezgoda === "Има") {
+            cenaZaPlakjanje = Number(cenaZaPlakjanje) + Number("500");
+        }
+
+        let tableRef = document.getElementById("smetki").getElementsByTagName("tbody")[0];
+
+        let newRow = tableRef.insertRow(tableRef.rows.length);
+
+        let newCell0 = newRow.insertCell(0);
+        let newCell1 = newRow.insertCell(1);
+        let newCell2 = newRow.insertCell(2);
+        let newCell3 = newRow.insertCell(3);
+        let newCell4 = newRow.insertCell(4);
+        let newCell5 = newRow.insertCell(5);
+
+        newCell0.innerHTML = ime + " " + prezime;
+        newCell1.innerHTML = tablica.value;
+        newCell2.innerHTML = "Сообраќајки: " + nezgoda;
+        newCell3.innerHTML = "Старост на возило: " + starost;
+        newCell4.innerHTML = "За плаќање: " + cenaZaPlakjanje;
+
+        document.getElementById("ime").value = "";
+        document.getElementById("prezime").value = "";
+        document.getElementById("tablica").value = "";
+        document.getElementById("starost").value = "";
+
+        for (let i = 0; i < 2; i++) {
+            document.getElementsByName("radio")[i].checked = false;
+        }
+    }
+
+</script>
+</html>

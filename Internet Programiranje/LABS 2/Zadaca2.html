@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca2</title>
+</head>
+<body>
+    <img src="" id="image" alt="Random image">
+    <input type="button" onclick="displayImage()" value="Display Random Image">
+</body>
+<script>
+
+    function displayImage() {
+        const images = ["https://steamuserimages-a.akamaihd.net/ugc/1791847286860612448/3F379125A18115010FD07D90276BD42368958CF7/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false\n",
+            "https://farm5.staticflickr.com/4060/4567292488_5d3f4b05f6_z.jpg", "https://staticctf.akamaized.net/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/6ZAlQrGYxXi8Bo8PuhJd5g/117dbe6cf56d580c60ad955e28467d88/ACV_Meta_image_website.png\n"];
+
+        let randomNumber = Math.floor(images.length * Math.random());
+
+        document.getElementById("image").src = images[randomNumber];
+    }
+
+</script>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+<form>
+    <h3><b>Sistem na smetki</b></h3>
+    <label for="ime">Ime: </label> <input type="text" id="ime"> <br>
+    <label for="prezime">Prezime: </label> <input type="text" id="prezime"><br>
+    <label for="id">ID: </label> <input type="text" id="id"><br>
+    <label for="promet">Promet: </label> <input type="text" id="promet"><br>
+    <button type="button" id="vnButton">Vnesi</button>
+</form>
+<h3><b>Vneseni Smetki</b></h3>
+<div id="vneseni"></div>
+<h3><b>Plateni Smetki</b></h3>
+<div id="plateni"></div>
+
+<script>
+    let jsonObject = {
+        "ime": "Nikola",
+        "prezime": "Nikolaevich",
+        "id": 1234567890,
+        "promet": 4500
+    }
+
+    let ime = document.getElementById("ime")
+    let prezime = document.getElementById("prezime")
+    let id = document.getElementById("id")
+    let promet = document.getElementById("promet")
+
+
+    ime.value = jsonObject.ime;
+    prezime.value = jsonObject.prezime;
+    id.value = jsonObject.id;
+    promet.value = jsonObject.promet;
+    let saveButton = document.getElementById("vnButton")
+
+    function isIdValid(arg) {
+        if (arg.length === 10) {
+            let countL = 0;
+            let countN = 0;
+            for (let i = 0; i < arg.length; i++) {
+                if (isNaN(arg[i]) && arg[i] === arg[i].toUpperCase())
+                    countL++;
+                if (!isNaN(arg[i]))
+                    countN++;
+            }
+            console.log(countL)
+            console.log(countN)
+            if (countL >= 3 && countN >= 1)
+                return true
+        }
+        return false
+    }
+
+    saveButton.addEventListener("click", () => {
+        let ime = document.getElementById("ime")
+        let prezime = document.getElementById("prezime")
+        let id = document.getElementById("id")
+        let promet = document.getElementById("promet")
+
+        if (id.value.length === 10 && !isNaN(promet.value)) {
+            if (isIdValid(id.value)) {
+                let vneseni = document.getElementById("vneseni")
+                let div = document.createElement("div")
+                div.style.width = "200px"
+                div.style.padding = "10px"
+                div.style.margin = "auto"
+                div.style.border = "1px solid black"
+
+                let smetkaBroj = createLabel("Smetka broj: ")
+                let smetkaBrojRand = document.createElement("span")
+                smetkaBrojRand.innerHTML = Math.floor(Math.random() * 99999)
+                let brSmetka = createBr()
+                let labelIme = createLabel("Ime: ")
+                let spanIme = createSpan(ime.value)
+                let brIme = createBr()
+                let labelPrezime = createLabel("Prezime: ")
+                let spanPrezime = createSpan(prezime.value)
+                let brPrezime = createBr();
+                let labelId = createLabel("ID: ")
+                let spanId = createSpan(id.value)
+                let brId = createBr()
+                let labelPromet = createLabel("Promet: ")
+                let spanPromet = createSpan(promet.value)
+                let brPromet = createBr()
+                let buttonPay = document.createElement("button")
+                buttonPay.type = "button"
+                buttonPay.innerHTML = "Plati"
+
+                div.appendChild(smetkaBroj)
+                div.appendChild(smetkaBrojRand)
+                div.appendChild(brSmetka)
+                div.appendChild(labelIme)
+                div.appendChild(spanIme)
+                div.appendChild(brIme)
+                div.appendChild(labelPrezime)
+                div.appendChild(spanPrezime)
+                div.appendChild(brPrezime)
+                div.appendChild(labelId)
+                div.appendChild(spanId)
+                div.appendChild(brId)
+                div.appendChild(labelPromet)
+                div.appendChild(spanPromet)
+                div.appendChild(brPromet)
+                div.appendChild(buttonPay)
+
+                function createLabel(arg) {
+                    let label = document.createElement("label");
+                    label.innerHTML = arg;
+                    return label;
+                }
+
+                function createBr() {
+                    let br = document.createElement("br");
+                    return br;
+                }
+
+                function createSpan(arg) {
+                    let span = document.createElement("span");
+                    span.innerHTML = arg;
+                    return span;
+                }
+
+                if (promet.value >= 5000)
+                    div.style.backgroundColor = "red"
+                else div.style.backgroundColor = "green"
+
+
+                buttonPay.addEventListener("click", () => {
+                    let plateni = document.getElementById("plateni")
+                    buttonPay.remove()
+                    plateni.appendChild(div)
+                })
+                vneseni.appendChild(div);
+            } else {
+                ime.value = "";
+                prezime.value = "";
+                id.value = "";
+                promet.value = "";
+                alert("Smetkata e otfrlena, obidete se povtorno");
+            }
+        }
+    })
+</script>
+</body>
+<style>
+    label {
+        display: inline-block;
+        margin: 3px;
+        width: 65px;
+    }
+</style>
+
+</html>

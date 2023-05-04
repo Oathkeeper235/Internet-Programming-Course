@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AtanasVelchevski206059</title>
+</head>
+<style>
+    table, td, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <h2>Post details</h2>
+
+    Title <input type="text" id="title"> <br> <br>
+    Post <textarea id="content" cols="30" rows="7"></textarea> <br> <br>
+
+    Content type <input type="radio" id="typeFree">Free <input type="radio" id="typePaid">Paid <br> <br>
+
+    Category
+    <select id="category">
+        <option value="Science">Science</option>
+        <option value="Education">Education</option>
+        <option value="Industry">Industry</option>
+    </select> <br> <br>
+
+    <button id="button" onclick="addRow()">Import post</button> <br> <br>
+
+    <h2 id="publishedPosts">Published posts </h2> <br> <br>
+
+    <table id="projects">
+        <thead>
+            <td>Title</td>
+            <td>Post</td>
+            <td>Link</td>
+            <td>Type</td>
+            <td>Category</td>
+            <td>Actions</td>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <h2>Removed links</h2>
+    <div id="removedLinks">
+
+    </div>
+</body>
+<script>
+    let i = 0;
+    document.getElementById("publishedPosts").innerHTML += i;
+
+
+    function addRow() {
+        let title = document.getElementById("title");
+        let content = document.getElementById("content");
+        let typeFree = document.getElementById("typeFree");
+        let typePaid = document.getElementById("typePaid");
+        let category = document.getElementById("category");
+        let titleWords = title.value.split(/\s+/);
+
+        let table = document.getElementById("projects").getElementsByTagName("tbody")[0];
+
+        if (title.value === "" || content.value === "") {
+            alert("All values are not entered, please try again.");
+            return;
+        }
+
+        let newRow = table.insertRow(table.rows.length);
+
+        let newCell0 = newRow.insertCell(0);
+        let newCell1 = newRow.insertCell(1);
+        let newCell2 = newRow.insertCell(2);
+        let newCell3 = newRow.insertCell(3);
+        let newCell4 = newRow.insertCell(4);
+        let newCell5 = newRow.insertCell(5);
+
+        newCell0.innerHTML = title.value;
+        newCell1.innerHTML = content.value;
+
+        newCell2.innerHTML = "finki.ukim.mk/";
+        let linkPole = "finki.ukim.mk/";
+        for (let i = 0; i < titleWords.length; i++) {
+            newCell2.innerHTML += titleWords[i];
+            linkPole += titleWords[i];
+            if (i !== titleWords.length - 1) {
+                newCell2.innerHTML += "-";
+                linkPole += "-";
+            }
+        }
+
+        newCell3.innerHTML = "Free";
+        newCell4.innerHTML = category.value;
+        newCell5.innerHTML = "<button>Publish</button> <br> <button>Remove</button>";
+
+        let buttons = newRow.getElementsByTagName("button");
+
+        buttons[0].addEventListener("click", function () {
+            newRow.style.backgroundColor = "lightblue";
+            buttons[0].disabled = true;
+            buttons[1].disabled = true;
+            i++
+            document.getElementById("publishedPosts").innerHTML = "Published posts " + i;
+        })
+
+        buttons[1].addEventListener("click", function () {
+            newRow.style.backgroundColor = "red";
+            let k = 0;
+            function f() {
+                if (k !== 5) {
+                    newRow.deleteCell(k);
+                    setInterval(f, 2000);
+                }
+            }
+            f();
+
+            let removedLinks = document.getElementById("removedLinks");
+            let newParagraph = document.createElement("p");
+            newParagraph.innerHTML = "<strong>-</strong>" + linkPole + "<br>";
+
+            removedLinks.append(newParagraph);
+        })
+    }
+</script>
+</html>

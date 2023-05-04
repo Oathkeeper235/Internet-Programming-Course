@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca3</title>
+</head>
+<body>
+    <h1>About Me</h1>
+    <ul id="list">
+        <li id="listItem1">Name: <span id="name"></span></li>
+        <li id="listItem2">Last Name: <span id="lastname"></span></li>
+        <li id="listItem3">Hometown: <span id="hometown"></span></li>
+    </ul>
+</body>
+<script>
+
+    document.body.style.fontFamily = "Arial";
+    document.getElementById("listItem1").style.backgroundColor = "red";
+    document.getElementById("listItem2").style.backgroundColor = "red";
+    document.getElementById("listItem3").style.backgroundColor = "red";
+
+    let name = prompt("Enter your name: ");
+    let lastName = prompt("Enter your last name: ");
+    let homeTown = prompt("Enter your hometown: ");
+
+    document.getElementById("name").innerText = name;
+    document.getElementById("lastname").innerText = lastName;
+    document.getElementById("hometown").innerText = homeTown;
+
+</script>
+</html>

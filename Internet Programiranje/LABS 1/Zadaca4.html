@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca4</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let vneseniBroevi = prompt("Внесете 3 броеви одделени со празно место: ");
+    let nizaOdBroevi = vneseniBroevi.split(' ');
+
+    if (nizaOdBroevi.length !== 3) {
+        window.alert("Внесовте повеќе или помалку од 3 броеви, обидете се повторно");
+        location.reload();
+    } else if ((/[a-zA-Z]/).test(nizaOdBroevi[0]) || (/[a-zA-Z]/).test(nizaOdBroevi[1]) || (/[a-zA-Z]/).test(nizaOdBroevi[2])) {
+        window.alert("Внесените карактери мора да бидат броеви, обидете се повторно");
+        location.reload();
+    } else {
+        function proizvodNaBroevi(input) {
+            let niza = input.split(' ');
+            if (niza[0] < 0 || niza[1] < 0 || niza[2] < 0)
+                return '-';
+            else
+                return '+';
+        }
+
+        console.log(proizvodNaBroevi(vneseniBroevi));
+
+        let vlez = "Влез: " + nizaOdBroevi.toString();
+        let izlez = "Знакот на производот на броевите е: " + proizvodNaBroevi(vneseniBroevi);
+
+        window.alert(vlez + '\n' + izlez);
+        location.reload();
+    }
+
+</script>
+</html>

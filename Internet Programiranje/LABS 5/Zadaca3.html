@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Zadaca3</title>
+</head>
+<body>
+<h1>Meморија</h1>
+<div style="text-align:left; float:left">
+    <table border="1px">
+        <tr>
+            <td><img id="0" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="1" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="2" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="3" src="slikiZadaca3/cover.png"/></td>
+        </tr>
+        <tr>
+            <td><img id="4" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="5" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="6" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="7" src="slikiZadaca3/cover.png"/></td>
+        </tr>
+        <tr>
+            <td><img id="8" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="9" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="10" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="11" src="slikiZadaca3/cover.png"/></td>
+        </tr>
+        <tr>
+            <td><img id="12" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="13" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="14" src="slikiZadaca3/cover.png"/></td>
+            <td><img id="15" src="slikiZadaca3/cover.png"/></td>
+        </tr>
+    </table>
+    <input onclick="location.reload()" type="submit" value="RESET"/>
+</div>
+<br/>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        //card options
+        const cardArray = [
+            {
+                name: 'gandalf',
+                img: 'slikiZadaca3/gandalf.png'
+            },
+            {
+                name: 'gandalf',
+                img: 'slikiZadaca3/gandalf.png'
+            },
+            {
+                name: 'finn',
+                img: 'slikiZadaca3/finn.png'
+            },
+            {
+                name: 'finn',
+                img: 'slikiZadaca3/finn.png'
+            },
+            {
+                name: 'flash',
+                img: 'slikiZadaca3/flash.png'
+            },
+            {
+                name: 'flash',
+                img: 'slikiZadaca3/flash.png'
+            },
+            {
+                name: 'bmo',
+                img: 'slikiZadaca3/bmo.png'
+            },
+            {
+                name: 'bmo',
+                img: 'slikiZadaca3/bmo.png'
+            },
+            {
+                name: 'geralt',
+                img: 'slikiZadaca3/geralt.png'
+            },
+            {
+                name: 'geralt',
+                img: 'slikiZadaca3/geralt.png'
+            },
+            {
+                name: 'spooderman',
+                img: 'slikiZadaca3/spooderman.png'
+            },
+            {
+                name: 'spooderman',
+                img: 'slikiZadaca3/spooderman.png'
+            },
+            {
+                name: 'superman',
+                img: 'slikiZadaca3/superman.png'
+            },
+            {
+                name: 'superman',
+                img: 'slikiZadaca3/superman.png'
+            },
+            {
+                name: 'terminator',
+                img: 'slikiZadaca3/terminator.png'
+            },
+            {
+                name: 'terminator',
+                img: 'slikiZadaca3/terminator.png'
+            },
+        ]
+
+        cardArray.sort(() => 0.5 - Math.random());
+
+        let cardsChosen = [];
+        let cardsChosenId = [];
+        let cardsWon = [];
+
+        //Create your board
+        function checkForClicks() {
+            for (let i = 0; i < 16; i++) {
+                let card = document.getElementById(i.toString());
+                card.addEventListener('click', flipCard);
+            }
+        }
+
+        // check for matches
+        function checkForMatch() {
+            let cards = document.querySelectorAll('img');
+            const optionOneId = cardsChosenId[0];
+            const optionTwoId = cardsChosenId[1];
+            if (cardsChosen[0] === cardsChosen[1]) {
+                alert("You found a match");
+                cardsWon.push(cardsChosen)
+            } else {
+                cards[optionOneId].setAttribute("src", "slikiZadaca3/cover.png");
+                cards[optionTwoId].setAttribute("src", "slikiZadaca3/cover.png");
+                alert("Sorry, try again");
+            }
+
+            cardsChosen = [];
+            cardsChosenId = [];
+
+            if (cardsWon.length === cardArray.length / 2)
+                alert("Congratulations! You found them all");
+        }
+
+        //flip your card
+        function flipCard() {
+            let cardId = this.getAttribute("id");
+            cardsChosen.push(cardArray[cardId].name);
+            cardsChosenId.push(cardId);
+            this.setAttribute('src', cardArray[cardId].img);
+
+            if (cardsChosen.length === 2) {
+                setTimeout(checkForMatch, 500);
+            }
+        }
+
+        checkForClicks()
+    })
+</script>

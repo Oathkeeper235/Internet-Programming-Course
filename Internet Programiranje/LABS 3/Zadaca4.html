@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca4</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let n = window.prompt("Колку книги ќе содржи библиотеката?");
+
+    if (n < 1 || isNaN(n)) {
+        window.alert("Внесете валиден број на книги.");
+        location.reload();
+    } else {
+        let library = [];
+
+        for (let i = 0; i < n; i++) {
+            let book = {
+                title: window.prompt("Внесете го насловот на книгата: "),
+                author: window.prompt("Внесете го името на авторот на книгата: "),
+                alreadyRead: window.prompt("Дали ја имате прочитано книгата, внесете true или false: ")
+            };
+
+            while (book.alreadyRead !== "true" && book.alreadyRead !== "false") {
+                window.alert("Ве молиме одговорете со true или false.");
+                book.alreadyRead = window.prompt("Дали ја имате прочитано книгата, внесете true или false: ");
+            }
+
+            library.push(book);
+        }
+
+        console.log(library);
+
+        function showBooksInLibrary(books) {
+            for (let i = 0; i < books.length; i++) {
+                if (books[i].alreadyRead === "true")
+                    window.alert("You already read " + books[i].title + " by " + books[i].author);
+                else
+                    window.alert("You still need to read " + books[i].title + " by " + books[i].author);
+            }
+        }
+
+        showBooksInLibrary(library);
+    }
+
+</script>
+</html>
